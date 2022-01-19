@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from .adventuree import Adventure
+from .adventure import Adventure
 
 __red_end_user_data_statement__ = (
     "This cog stores data provided by users "
@@ -14,5 +14,5 @@ __red_end_user_data_statement__ = (
 
 
 async def setup(bot):
-    cog = Adventure(bot)
+    cog = Adventuree(bot)
     bot.add_cog(cog)
