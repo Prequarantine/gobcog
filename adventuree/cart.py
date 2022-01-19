@@ -221,7 +221,7 @@ class AdventureCart(AdventureMixin):
             # 1% legendary REMOVED TO MAKE GAME MORE ENJOYABLE FOR OUR SMALL GROUP FOR NOW
             # 20% epic REMOVED TO MAKE MORE ENJOYABLE FOR NOW
             # 35% rare
-            elif rarity_roll >= 0.35:
+            if rarity_roll >= 0.35:
                 item = await self._genitem(self, "rare")
                 # around 3 stat for rare, want to be about 3k
                 price = random.randint(500, 1000)
