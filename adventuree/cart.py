@@ -16,7 +16,7 @@ from .abc import AdventureMixin
 from .bank import bank
 from .charsheet import Character
 from .helpers import escape, is_dev, smart_embed
-from .loot import genitem
+from .loot import _genitem
 
 _ = Translator("Adventure", __file__)
 
