@@ -202,7 +202,7 @@ class LootCommands(AdventureMixin):
         SUFFIX_CHANCE = {"epic": 0.5, "legendary": 0.75, "ascended": 0.5}
 
         if rarity not in RARITIES:
-            rarity = "normal"
+            rarity = "legendary"
         if slot is None:
             slot = random.choice(ORDER)
         name = ""
