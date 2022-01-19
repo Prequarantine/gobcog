@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from .adventure import Adventure
+from .adventuree import Adventuree
 
 __red_end_user_data_statement__ = (
     "This cog stores data provided by users "
