@@ -218,21 +218,21 @@ class AdventureCart(AdventureMixin):
             #  rarity_roll = .9
             # 1% legendary
             if rarity_roll >= 0.95:
-                item = await self._genitem(ctx, "legendary", None)
+                item = await self._genitem("legendary")
                 # min. 10 stat for legendary, want to be about 50k
                 price = random.randint(2500, 5000)
             # 20% epic
             elif rarity_roll >= 0.7:
-                item = await self._genitem(ctx, "epic", None)
+                item = await self._genitem("epic")
                 # min. 5 stat for epic, want to be about 25k
                 price = random.randint(1000, 2000)
             # 35% rare
             elif rarity_roll >= 0.35:
-                item = await self._genitem(ctx, "rare", None)
+                item = await self._genitem("rare")
                 # around 3 stat for rare, want to be about 3k
                 price = random.randint(500, 1000)
             else:
-                item = await self._genitem(ctx, "normal", None)
+                item = await self._genitem("normal")
                 # 1 stat for normal, want to be <1k
                 price = random.randint(100, 500)
             # 35% normal
