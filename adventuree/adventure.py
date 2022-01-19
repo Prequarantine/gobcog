@@ -1340,16 +1340,16 @@ class Adventure(
                     treasure = random.choice(
                         [[1, 1, 1, 0, 0, 0], [0, 0, 1, 1, 1, 0], [0, 0, 2, 2, 0, 0], [0, 1, 0, 2, 1, 0]]
                     )
-                elif monster_amount >= 700:  # super hard stuff
+                elif monster_amount >= 400:  # super hard stuff
                     if roll <= 7:
                         treasure = random.choice([[0, 0, 1, 0, 0, 0], [0, 1, 0, 0, 0, 0], [0, 0, 0, 1, 1, 0]])
-                elif monster_amount >= 500:  # rewards 50:50 rare:epic chest for killing hard stuff.
+                elif monster_amount >= 300:  # rewards 50:50 rare:epic chest for killing hard stuff.
                     if roll <= 5:
                         treasure = random.choice([[0, 0, 1, 0, 0, 0], [0, 1, 0, 0, 0, 0], [0, 1, 1, 0, 0, 0]])
-                elif monster_amount >= 300:  # rewards 50:50 rare:normal chest for killing hardish stuff
+                elif monster_amount >= 200:  # rewards 50:50 rare:normal chest for killing hardish stuff
                     if roll <= 2:
                         treasure = random.choice([[1, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0], [1, 1, 0, 0, 0, 0]])
-                elif monster_amount >= 80:  # small chance of a normal chest on killing stuff that's not terribly weak
+                elif monster_amount >= 60:  # small chance of a normal chest on killing stuff that's not terribly weak
                     if roll == 1:
                         treasure = [1, 0, 0, 0, 0, 0]
 
