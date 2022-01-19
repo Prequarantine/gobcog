@@ -14,5 +14,5 @@ __red_end_user_data_statement__ = (
 
 
 async def setup(bot):
-    cog = Adventuree(bot)
+    cog = Adventure(bot)
     bot.add_cog(cog)
