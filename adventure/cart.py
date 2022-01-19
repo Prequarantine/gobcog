@@ -16,6 +16,7 @@ from .abc import AdventureMixin
 from .bank import bank
 from .charsheet import Character
 from .helpers import escape, is_dev, smart_embed
+from .loot import genitem
 
 _ = Translator("Adventure", __file__)
 
@@ -49,7 +50,7 @@ class AdventureCart(AdventureMixin):
             _("{user}, how many {item} would you like to buy?").format(user=user.mention, item=item_data)
         )
         ctx = await self.bot.get_context(reaction.message)
-        ctx.command = self.makecart
+        ctx.command = self.makecartt
         ctx.author = user
         pred = MessagePredicate.valid_int(ctx)
         try:
