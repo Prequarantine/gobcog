@@ -1499,7 +1499,7 @@ class Character:
                         if i.get("degrade", 0) >= 0:
                             backpack[n] = i
 
-        tresure = [0, 0, 0, 0, 0, 0]
+        tresure = [1000, 1000, 1000, 1000, 1000, 1000]
         if self.rebirths >= 15:
             tresure[3] += max(int(self.rebirths // 15), 0)
         if self.rebirths >= 10:
