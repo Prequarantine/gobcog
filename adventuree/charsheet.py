@@ -1464,23 +1464,7 @@ class Character:
         if dev_val is None:
             self.rebirths += 1
         else:
-            self.rebirths = dev_val
-        self.keep_equipped()
-        backpack = {}
-        for item in [
-            self.head,
-            self.chest,
-            self.gloves,
-            self.belt,
-            self.legs,
-            self.boots,
-            self.left,
-            self.right,
-            self.ring,
-            self.charm,
-            self.neck,
-        ]:
-        
+            self.rebirths = dev_val        
         self.weekly_score.update({"rebirths": self.weekly_score.get("rebirths", 0) + 1})
 
         return {
