@@ -1476,7 +1476,6 @@ class Character:
             "att": 0,
             "int": 0,
             "cha": 0,
-            "treasure": tresure,
             "items": {
                 "head": self.pieces_to_keep.get("head", {}),
                 "neck": self.pieces_to_keep.get("neck", {}),
