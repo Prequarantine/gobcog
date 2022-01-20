@@ -1480,20 +1480,10 @@ class Character:
             self.charm,
             self.neck,
         ]:
-            if item and item.to_json() not in list(self.pieces_to_keep.values()):
-                await self.add_to_backpack(item)
+
         forged = 0
 
-        tresure = [1000, 1000, 1000, 1000, 1000, 1000]
-        if self.rebirths >= 15:
-            tresure[3] += max(int(self.rebirths // 15), 0)
-        if self.rebirths >= 10:
-            tresure[2] += max(int(self.rebirths // 10), 0)
-        if self.rebirths >= 5:
-            tresure[1] += max(int(self.rebirths // 5), 0)
-        if self.rebirths > 0:
-            tresure[0] += max(int(self.rebirths), 0)
-
+        
         self.weekly_score.update({"rebirths": self.weekly_score.get("rebirths", 0) + 1})
 
         return {
