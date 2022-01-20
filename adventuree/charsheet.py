@@ -1483,21 +1483,6 @@ class Character:
             if item and item.to_json() not in list(self.pieces_to_keep.values()):
                 await self.add_to_backpack(item)
         forged = 0
-        for (k, v) in self.backpack.items():
-            for (n, i) in v.to_json().items():
-                if i.get("degrade", 0) == -1 and i.get("rarity", "common") == "event":
-                    backpack[n] = i
-                elif i.get("rarity", False) in ["set", "forged"] or str(v) in [".mirror_shield"]:
-                    if i.get("rarity", False) in ["forged"]:
-                        if forged > 0:
-                            continue
-                        forged += 1
-                    backpack[n] = i
-                elif self.rebirths < 50 and i.get("rarity", False) in ["legendary", "event", "ascended"]:
-                    if "degrade" in i:
-                        i["degrade"] -= 1
-                        if i.get("degrade", 0) >= 0:
-                            backpack[n] = i
 
         tresure = [1000, 1000, 1000, 1000, 1000, 1000]
         if self.rebirths >= 15:
