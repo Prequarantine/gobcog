@@ -1489,7 +1489,6 @@ class Character:
                 "ring": self.pieces_to_keep.get("ring", {}),
                 "charm": self.pieces_to_keep.get("charm", {}),
             },
-            "backpack": backpack,
             "loadouts": self.loadouts,  # convert to dict of items
             "heroclass": self.heroclass,
             "skill": {"pool": 0, "att": 0, "cha": 0, "int": 0},
