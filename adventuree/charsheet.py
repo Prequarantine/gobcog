@@ -328,6 +328,19 @@ class Character:
         self.adventures: dict = kwargs.pop("adventures")
         self.nega: dict = kwargs.pop("nega")
         self.weekly_score: dict = kwargs.pop("weekly_score")
+        self.pieces_to_keep: dict = {
+            "head": {},
+            "neck": {},
+            "chest": {},
+            "gloves": {},
+            "belt": {},
+            "legs": {},
+            "boots": {},
+            "left": {},
+            "right": {},
+            "ring": {},
+            "charm": {},
+        }
         self.last_skill_reset: int = kwargs.pop("last_skill_reset", 0)
         self.daily_bonus = kwargs.pop(
             "daily_bonus_mapping", {"1": 0, "2": 0, "3": 0.5, "4": 0, "5": 0.5, "6": 1.0, "7": 1.0}
@@ -1451,7 +1464,51 @@ class Character:
         if dev_val is None:
             self.rebirths += 1
         else:
-            self.rebirths = dev_val        
+            self.rebirths = dev_val
+        self.keep_equipped()
+        backpack = {}
+        for item in [
+            self.head,
+            self.chest,
+            self.gloves,
+            self.belt,
+            self.legs,
+            self.boots,
+            self.left,
+            self.right,
+            self.ring,
+            self.charm,
+            self.neck,
+        ]:
+            if item and item.to_json() not in list(self.pieces_to_keep.values()):
+                await self.add_to_backpack(item)
+        forged = 0
+        for (k, v) in self.backpack.items():
+            for (n, i) in v.to_json().items():
+                if i.get("degrade", 0) == -1 and i.get("rarity", "common") == "event":
+                    backpack[n] = i
+                elif i.get("rarity", False) in ["set", "forged"] or str(v) in [".mirror_shield"]:
+                    if i.get("rarity", False) in ["forged"]:
+                        if forged > 0:
+                            continue
+                        forged += 1
+                    backpack[n] = i
+                elif self.rebirths < 50 and i.get("rarity", False) in ["legendary", "event", "ascended"]:
+                    if "degrade" in i:
+                        i["degrade"] -= 1
+                        if i.get("degrade", 0) >= 0:
+                            backpack[n] = i
+
+        tresure = [0, 0, 0, 0, 0, 0]
+        if self.rebirths >= 15:
+            tresure[3] += max(int(self.rebirths // 15), 0)
+        if self.rebirths >= 10:
+            tresure[2] += max(int(self.rebirths // 10), 0)
+        if self.rebirths >= 5:
+            tresure[1] += max(int(self.rebirths // 5), 0)
+        if self.rebirths > 0:
+            tresure[0] += max(int(self.rebirths), 0)
+
         self.weekly_score.update({"rebirths": self.weekly_score.get("rebirths", 0) + 1})
 
         return {
@@ -1463,6 +1520,21 @@ class Character:
             "att": 0,
             "int": 0,
             "cha": 0,
+            "treasure": tresure,
+            "items": {
+                "head": self.pieces_to_keep.get("head", {}),
+                "neck": self.pieces_to_keep.get("neck", {}),
+                "chest": self.pieces_to_keep.get("chest", {}),
+                "gloves": self.pieces_to_keep.get("gloves", {}),
+                "belt": self.pieces_to_keep.get("belt", {}),
+                "legs": self.pieces_to_keep.get("legs", {}),
+                "boots": self.pieces_to_keep.get("boots", {}),
+                "left": self.pieces_to_keep.get("left", {}),
+                "right": self.pieces_to_keep.get("right", {}),
+                "ring": self.pieces_to_keep.get("ring", {}),
+                "charm": self.pieces_to_keep.get("charm", {}),
+            },
+            "backpack": backpack,
             "loadouts": self.loadouts,  # convert to dict of items
             "heroclass": self.heroclass,
             "skill": {"pool": 0, "att": 0, "cha": 0, "int": 0},
@@ -1472,6 +1544,18 @@ class Character:
             "last_currency_check": 0,
         }
 
+    def keep_equipped(self):
+        items_to_keep = {}
+        last_slot = ""
+        for slots in ORDER:
+            if slots == "two handed":
+                continue
+            if last_slot == "two handed":
+                last_slot = slots
+                continue
+            item = getattr(self, slots)
+            items_to_keep[slots] = item.to_json() if self.rebirths >= 30 and item and item.set else {}
+        self.pieces_to_keep = items_to_keep
 
 
 async def calculate_sp(lvl_end: int, c: Character):
