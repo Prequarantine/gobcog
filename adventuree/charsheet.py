@@ -1480,9 +1480,6 @@ class Character:
             self.charm,
             self.neck,
         ]:
-
-        forged = 0
-
         
         self.weekly_score.update({"rebirths": self.weekly_score.get("rebirths", 0) + 1})
 
