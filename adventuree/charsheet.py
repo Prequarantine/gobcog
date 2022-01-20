@@ -1485,7 +1485,7 @@ class Character:
         forged = 0
         for (k, v) in self.backpack.items():
             for (n, i) in v.to_json().items():
-                if i.get("rarity", False) in ["common", "rare", "epic", "rare", "ascended", "legendary", "set", "forged"] or str(v) in [".mirror_shield"]:
+                if i.get("rarity", False) in ["normal", "rare", "epic", "rare", "ascended", "legendary", "set", "forged"] or str(v) in [".mirror_shield"]:
                     if i.get("rarity", False) in ["forged"]:
                         if forged > 0:
                             continue
