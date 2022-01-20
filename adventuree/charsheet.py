@@ -328,19 +328,6 @@ class Character:
         self.adventures: dict = kwargs.pop("adventures")
         self.nega: dict = kwargs.pop("nega")
         self.weekly_score: dict = kwargs.pop("weekly_score")
-        self.pieces_to_keep: dict = {
-            "head": {},
-            "neck": {},
-            "chest": {},
-            "gloves": {},
-            "belt": {},
-            "legs": {},
-            "boots": {},
-            "left": {},
-            "right": {},
-            "ring": {},
-            "charm": {},
-        }
         self.last_skill_reset: int = kwargs.pop("last_skill_reset", 0)
         self.daily_bonus = kwargs.pop(
             "daily_bonus_mapping", {"1": 0, "2": 0, "3": 0.5, "4": 0, "5": 0.5, "6": 1.0, "7": 1.0}
@@ -1485,18 +1472,6 @@ class Character:
             "last_currency_check": 0,
         }
 
-    def keep_equipped(self):
-        items_to_keep = {}
-        last_slot = ""
-        for slots in ORDER:
-            if slots == "two handed":
-                continue
-            if last_slot == "two handed":
-                last_slot = slots
-                continue
-            item = getattr(self, slots)
-            items_to_keep[slots] = item.to_json() if self.rebirths >= 30 and item and item.set else {}
-        self.pieces_to_keep = items_to_keep
 
 
 async def calculate_sp(lvl_end: int, c: Character):
