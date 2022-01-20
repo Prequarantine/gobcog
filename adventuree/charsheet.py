@@ -209,7 +209,7 @@ class Item:
                 dex = item.get("dex", dex)
                 luck = item.get("luck", luck)
                 slots = item.get("slot", slots)
-        if rarity not in ["common", "rare", "epic", "legendary", "event", "ascended"]:
+        if rarity not in ["normal", "rare", "epic", "legendary", "event", "ascended"]:
             degrade = 3
         if rarity not in ["event"]:
             lvl = 1
