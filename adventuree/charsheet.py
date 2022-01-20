@@ -209,7 +209,7 @@ class Item:
                 dex = item.get("dex", dex)
                 luck = item.get("luck", luck)
                 slots = item.get("slot", slots)
-        if rarity not in ["legendary", "event", "ascended"]:
+        if rarity not in ["common", "rare", "epic", "legendary", "event", "ascended"]:
             degrade = 3
         if rarity not in ["event"]:
             lvl = 1
@@ -1485,19 +1485,12 @@ class Character:
         forged = 0
         for (k, v) in self.backpack.items():
             for (n, i) in v.to_json().items():
-                if i.get("degrade", 0) == -1 and i.get("rarity", "common") == "event":
-                    backpack[n] = i
-                elif i.get("rarity", False) in ["set", "forged"] or str(v) in [".mirror_shield"]:
+                if i.get("rarity", False) in ["common", "rare", "epic", "rare", "ascended", "legendary", "set", "forged"] or str(v) in [".mirror_shield"]:
                     if i.get("rarity", False) in ["forged"]:
                         if forged > 0:
                             continue
                         forged += 1
                     backpack[n] = i
-                elif self.rebirths < 50 and i.get("rarity", False) in ["legendary", "event", "ascended"]:
-                    if "degrade" in i:
-                        i["degrade"] -= 1
-                        if i.get("degrade", 0) >= 0:
-                            backpack[n] = i
 
         tresure = [0, 0, 0, 0, 0, 0]
         if self.rebirths >= 15:
