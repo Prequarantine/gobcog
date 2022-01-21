@@ -96,7 +96,7 @@ class Item:
             # epic and legendary stats too similar so make level req's
             # the same
             rarity_multiplier = max(min(RARITIES.index(self.rarity) if self.rarity in RARITIES else 1, 5), 1)
-            mult = 1 - (rarity_multiplier / 15)
+            mult = 1 - (rarity_multiplier / 25)
             positive_stats = (
                 sum([i for i in [self.att, self.int, self.cha, self.dex, self.luck] if i > 0])
                 * mult
