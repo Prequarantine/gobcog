@@ -98,12 +98,12 @@ class Item:
             rarity_multiplier = max(min(RARITIES.index(self.rarity) if self.rarity in RARITIES else 1, 5), 1)
             mult = 1 - (rarity_multiplier / 25)
             positive_stats = (
-                sum([i for i in [self.att, self.int, self.cha, self.dex, self.luck] if i > 0])
+                sum([i for i in [self.att, self.int, self.cha, self.dex * 0.8, self.luck * 0.8] if i > 0])
                 * mult
                 * (1.7 if len(self.slot) == 2 else 1)
             )
             negative_stats = (
-                sum([i for i in [self.att, self.int, self.cha, self.dex, self.luck] if i < 0])
+                sum([i for i in [self.att, self.int, self.cha, self.dex * 0.8, self.luck * 0.8] if i < 0])
                 / (2 + mult)
                 * (1.7 if len(self.slot) == 2 else 1)
             )
