@@ -1834,7 +1834,7 @@ class Adventure(
             except Exception as exc:
                 log.exception("Error with the new character sheet", exc_info=exc)
                 continue
-            crit_mod = max(c.dex + c.luck // 2 + (c.total_att // 20), 0)  # Thanks GoaFan77
+            crit_mod = max(c.dex + (c.luck // 2) + (c.total_att // 20), 0)  # Thanks GoaFan77
             mod = 0
             max_roll = 100 if c.rebirths >= 30 else 50 if c.rebirths >= 15 else 20
             if crit_mod != 0:
@@ -1909,7 +1909,7 @@ class Adventure(
             except Exception as exc:
                 log.exception("Error with the new character sheet", exc_info=exc)
                 continue
-            crit_mod = max(c.dex + c.luck // 2 + (c.total_int // 20), 0)
+            crit_mod = max(c.dex + (c.luck // 2) + (c.total_int // 20), 0)
             mod = 0
             max_roll = 100 if c.rebirths >= 30 else 50 if c.rebirths >= 15 else 20
             if crit_mod != 0:
@@ -2012,7 +2012,7 @@ class Adventure(
                 continue
             rebirths = c.rebirths * (2 if c.heroclass["name"] == "Cleric" else 1)
             if c.heroclass["name"] == "Cleric":
-                crit_mod = max(c.dex + c.luck // 2 + (c.total_int // 20), 0)
+                crit_mod = max(c.dex + (c.luck // 2) + (c.total_int // 20), 0)
                 mod = 0
                 max_roll = 100 if c.rebirths >= 30 else 50 if c.rebirths >= 15 else 20
                 if crit_mod != 0:
@@ -2163,7 +2163,7 @@ class Adventure(
             except Exception as exc:
                 log.exception("Error with the new character sheet", exc_info=exc)
                 continue
-            crit_mod = max(c.dex + c.luck // 2 + (c.total_int // 50) + (c.total_cha // 20), 0)
+            crit_mod = max(c.dex + (c.luck // 2) + (c.total_int // 50) + (c.total_cha // 20), 0)
             mod = 0
             max_roll = 100 if c.rebirths >= 30 else 50 if c.rebirths >= 15 else 20
             if crit_mod != 0:
