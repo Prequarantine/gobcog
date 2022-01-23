@@ -85,9 +85,9 @@ class AdventureResults:
             win_percent = num_wins / raid_count
             min_stat = avg_amount * 0.75
             max_stat = avg_amount * 2
-            # want win % to be at least 50%, even when solo
+            # want win % to be at least 65%, even when solo
             # if win % is below 50%, scale back min/max for easier mons
-            if win_percent < 0.5:
+            if win_percent < 0.65:
                 min_stat = avg_amount * win_percent
                 max_stat = avg_amount * 1.5
 
