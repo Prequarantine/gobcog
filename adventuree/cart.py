@@ -141,7 +141,7 @@ class AdventureCart(AdventureMixin):
         if room is None or bypass:
             room = ctx
         self.bot.dispatch("adventure_cart", ctx)  # dispatch after silent return
-        stockcount = random.randint(3, 9)
+        stockcount = random.randint(5, 12)
         controls = {em_list[i + 1]: i for i in range(stockcount)}
         self._curent_trader_stock[ctx.guild.id] = (stockcount, controls)
 
@@ -211,26 +211,30 @@ class AdventureCart(AdventureMixin):
         with contextlib.suppress(discord.HTTPException):
             await msg.delete()
 
-    async def _trader_get_items(self, howmany: int):
+    async def _trader_get_items(self, ctx: commands.Contex, howmany: int):
         items = {}
         output = {}
 
         while len(items) < howmany:
             rarity_roll = random.random()
             #  rarity_roll = .9
-            # 1% legendary REMOVED TO MAKE GAME MORE ENJOYABLE FOR OUR SMALL GROUP FOR NOW
+            # 2% legendary REMOVED TO MAKE GAME MORE ENJOYABLE FOR OUR SMALL GROUP FOR NOW
+            if rarity_roll >= 0.98:
+                item = await self._genitem(ctx, "legendary")
+                # min. 5 stat for epic, want to be about 25k
+                price = random.randint(2500, 5000)            
             # 15% epic reimplemented with iLvL rework
-            if rarity_roll >= 0.85:
-                item = await self._genitem(self, "epic")
+            if rarity_roll >= 0.75:
+                item = await self._genitem(ctx, "epic")
                 # min. 5 stat for epic, want to be about 25k
                 price = random.randint(1000, 2000)
             # 35% rare
             elif rarity_roll >= 0.35:
-                item = await self._genitem(self, "rare")
+                item = await self._genitem(ctx, "rare")
                 # around 3 stat for rare, want to be about 3k
                 price = random.randint(500, 1000)
             else:
-                item = await self._genitem(self, "normal")
+                item = await self._genitem(ctx, "normal")
                 # 1 stat for normal, want to be <1k
                 price = random.randint(100, 500)
             # 35% normal
