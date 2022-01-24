@@ -211,7 +211,7 @@ class AdventureCart(AdventureMixin):
         with contextlib.suppress(discord.HTTPException):
             await msg.delete()
 
-    async def _trader_get_items(self, ctx: commands.Contex, howmany: int):
+    async def _trader_get_items(self, ctx: commands.Context, howmany: int):
         items = {}
         output = {}
 
