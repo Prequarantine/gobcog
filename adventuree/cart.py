@@ -141,7 +141,7 @@ class AdventureCart(AdventureMixin):
         if room is None or bypass:
             room = ctx
         self.bot.dispatch("adventure_cart", ctx)  # dispatch after silent return
-        stockcount = random.randint(5, 12)
+        stockcount = random.randint(5, 9)
         controls = {em_list[i + 1]: i for i in range(stockcount)}
         self._curent_trader_stock[ctx.guild.id] = (stockcount, controls)
 
