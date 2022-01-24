@@ -211,7 +211,7 @@ class AdventureCart(AdventureMixin):
         with contextlib.suppress(discord.HTTPException):
             await msg.delete()
 
-    async def _trader_get_items(self, ctx: commands.Context, howmany: int):
+    async def _trader_get_items(self, howmany: int):
         items = {}
         output = {}
 
@@ -220,21 +220,21 @@ class AdventureCart(AdventureMixin):
             #  rarity_roll = .9
             # 2% legendary REMOVED TO MAKE GAME MORE ENJOYABLE FOR OUR SMALL GROUP FOR NOW
             if rarity_roll >= 0.98:
-                item = await self._genitem(ctx, "legendary")
+                item = await self._genitem(self, "legendary")
                 # min. 5 stat for epic, want to be about 25k
                 price = random.randint(2500, 5000)            
             # 15% epic reimplemented with iLvL rework
             if rarity_roll >= 0.75:
-                item = await self._genitem(ctx, "epic")
+                item = await self._genitem(self, "epic")
                 # min. 5 stat for epic, want to be about 25k
                 price = random.randint(1000, 2000)
             # 35% rare
             elif rarity_roll >= 0.35:
-                item = await self._genitem(ctx, "rare")
+                item = await self._genitem(self, "rare")
                 # around 3 stat for rare, want to be about 3k
                 price = random.randint(500, 1000)
             else:
-                item = await self._genitem(ctx, "normal")
+                item = await self._genitem(self, "normal")
                 # 1 stat for normal, want to be <1k
                 price = random.randint(100, 500)
             # 35% normal
