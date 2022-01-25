@@ -1856,7 +1856,7 @@ class Adventure(
                 elif roll > 25 and pet_crit >= 95:
                     roll = random.randint(roll, max_roll)
             roll_perc = roll / max_roll
-            att_value = c.total_att
+            att_value = c.total_att + round(c.total_att * 0.1)
             rebirths = c.rebirths * (3 if c.heroclass["name"] == "Berserker" else 1)
             if roll_perc < 0.10:
                 if c.heroclass["name"] == "Berserker" and c.heroclass["ability"]:
