@@ -1856,7 +1856,7 @@ class Adventure(
                 elif roll > 25 and pet_crit >= 95:
                     roll = random.randint(roll, max_roll)
             roll_perc = roll / max_roll
-            att_value = c.total_att + round(c.total_att * 0.3)
+            att_value = c.total_att + round(c.total_att * 0.1)
             rebirths = c.rebirths * (3 if c.heroclass["name"] == "Berserker" else 1)
             if roll_perc < 0.10:
                 if c.heroclass["name"] == "Berserker" and c.heroclass["ability"]:
@@ -2525,8 +2525,8 @@ class Adventure(
             except Exception as exc:
                 log.exception("Error with the new character sheet", exc_info=exc)
                 continue
-            userxp = int(xp + (xp * 0.5 * c.rebirths) + max((xp * 0.1 * min(250, c._int / 10)), 0))
-            usercp = int(cp + max((cp * 0.1 * min(1000, (c._luck + c._att) / 10)), 0))
+            userxp = int(xp + (xp * 0.5 * c.rebirths) + max((xp * 0.1 * min(250, (c._luck + c._dex) / 10), c._int / 10), 0))
+            usercp = int(cp + max((cp * 0.1 * min(1000, (c._luck + c._dex) / 10)), 0))
             userxp = int(userxp * (c.gear_set_bonus.get("xpmult", 1) + daymult + session_bonus))
             usercp = int(usercp * (c.gear_set_bonus.get("cpmult", 1) + daymult))
             newxp += userxp
